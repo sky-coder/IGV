@@ -1,2 +1,2 @@
 # IGV
-Intelligent Ground Vehicle
+Source files for Intelligent Ground Vehicle project.
