@@ -30,7 +30,7 @@ int main(int argc, char **argv)
 	LeftPort.setPort(LEFT_PORT);
 	LeftPort.setBaudrate(115200);
 	serial::Timeout to = serial::Timeout::simpleTimeout(1000);
-    LeftPort.setTimeout(to);
+	LeftPort.setTimeout(to);
 	LeftPort.open();
 
 	if(ros::ok())
