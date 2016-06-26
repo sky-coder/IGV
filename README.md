@@ -8,8 +8,10 @@ as a submodule of this project.
 
 ###2. sicktoolbox & sicktoolbox_wrapper
 These two packages were installed for globally use instead of being used as 
-submodules. <br/ >
+submodules.
+
 (1)Installation:
+
 	$ sudo apt-get install ros-indigo-sicktoolbox
 	$ sudo apt-get install ros-indigo-sicktoolbox-wrapper
 	$ rosdep install sicktoolbox_wrapper rviz
