@@ -6,8 +6,18 @@ MotionGenerator::MotionGenerator()
 	VelocityArray = new int[4];
 	CRCArray = new int[2];
 
+	serial::Timeout to = serial::Timeout::simpleTimeout(1000);
+
 	LeftPort.setPort(LEFT_PORT);
+	LeftPort.setBaudrate(115200);
+	LeftPort.setTimeout(to);
+
 	RightPort.setPort(RIGHT_PORT);
+	RightPort.setBaudrate(115200);
+	RightPort.setTimeout(to);
+
+	LeftPort.open();
+	RightPort.open();
 }
 
 MotionGenerator::~MotionGenerator()
@@ -19,12 +29,6 @@ MotionGenerator::~MotionGenerator()
 		delete[] CRCArray;
 	}
 }
-
-//============================================================================ Part 1
-// void MotionGenerator::setVelocity(int vel_in)
-// {
-// 	velocity = vel_in;
-// }
 
 void MotionGenerator::getVelocityArray()
 {
@@ -126,11 +130,11 @@ void MotionGenerator::setVelocity_Left(int vel_in)
 										CRCArray[1]);
 	LeftPort.write(VelocityCommand, VEL_CMD_SIZE);
 
-	std::cout << "vel cmd is: ";
-	for(int m = 0; m < 14; m++){
-		std::cout << VelocityCommand[m];
-	}
-	std::cout << std::endl;
+	// std::cout << "vel cmd is: ";
+	// for(int m = 0; m < 14; m++){
+	// 	std::cout << VelocityCommand[m];
+	// }
+	// std::cout << std::endl;
 }
 //----------------------------------------------------------------------- Right
 void MotionGenerator::getWriteAccess_Right()
@@ -217,8 +221,3 @@ void MotionGenerator::setVelocityCommand(
 	VelocityCommand[12] = datacrc_0;
 	VelocityCommand[13] = datacrc_1;
 }
-//============================================================================= Part 5
-//void MotionGenerator::transmitCommand()
-//{
-//	s;
-//}
