@@ -1,9 +1,9 @@
 #include <ros/ros.h>
+#include <serial/serial.h>
+
 #include <std_msgs/String.h>
 #include <iostream>
 #include <string>
-
-#include "serial/serial.h"
 
 #define LEFT_PORT "/dev/ttyUSB0"
 #define RIGHT_PORT "/dev/ttyUSB1"
@@ -48,6 +48,7 @@ int main(int argc, char **argv)
 	// serial::Timeout to = serial::Timeout::simpleTimeout(1000);
 	// RightPort.setTimeout(to);
 	// RightPort.open();
+	// ROS_INFO_STREAM("Right Port is opened.");
 
 	if(ros::ok())
 	{
@@ -63,7 +64,6 @@ int main(int argc, char **argv)
 		LeftPort.write(disableBridgeLeft, 12);
 		ROS_INFO_STREAM("Bridge Disabled.");
 		
-		// ROS_INFO_STREAM("Right Port is opened.");
 		// RightPort.write(getTxRight, 12);
 		// ROS_INFO_STREAM("Tx Access Got.");
 		// RightPort.write(setVelocityRight, 14);

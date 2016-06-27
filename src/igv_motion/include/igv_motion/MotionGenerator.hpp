@@ -1,16 +1,13 @@
-#include "serial/serial.h"
+#include <serial/serial.h>
 
 #ifndef MOTIONGENERATOR_H
 #define MOTIONGENERATOR_H
 
-#define LEFT_PORT "/dev/tty0"
-#define RIGHT_PORT "/dev/tty1"
+#define LEFT_PORT "/dev/ttyUSB0"
+#define RIGHT_PORT "/dev/ttyUSB1"
 #define CFG_CMD_SIZE 12
 #define VEL_CMD_SIZE 14
 
-// extern int velocity;
-// extern int *VelocityArray;
-// extern int *CRCArray;
 static uint8_t ConfigurationCommand[12];
 static uint8_t VelocityCommand[14];
 
@@ -21,7 +18,6 @@ class MotionGenerator
         virtual ~MotionGenerator();
 		
 		// Part 1
-		//void setVelocity(int);
         void getVelocityArray();
 
 		// Part 2
@@ -45,9 +41,6 @@ class MotionGenerator
 									 int, int, int, int);
 		void setVelocityCommand(int, int, int, int, int, int, int, int,
 								int, int, int, int, int, int);
-
-		// Part 5
-		//void transmitCommand();
 
 	private:
 		int velocity, highest_bit, CRCBuffer;
