@@ -3,8 +3,8 @@ Source files for Intelligent Ground Vehicle project.
 
 ## Dependencies
 ###1. serial
-A serial communication package from https://github.com/wjwwood/serial, forked 
-as a submodule of this project.
+A serial communication package from https://github.com/wjwwood/serial, was 
+installed for globally use after June 27, 2016.
 
 ###2. sicktoolbox & sicktoolbox_wrapper
 These two packages were installed for globally use instead of being used as 
