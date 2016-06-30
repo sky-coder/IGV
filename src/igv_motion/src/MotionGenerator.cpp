@@ -1,4 +1,4 @@
-#include "igv_motion/MotionGenerator.hpp"
+#include "igv_motion/MotionGenerator.h"
 #include <iostream>
 
 MotionGenerator::MotionGenerator()

@@ -5,10 +5,10 @@ project(igv_motion)
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
-  roscpp
-  std_msgs
   message_generation
+  roscpp
   serial
+  std_msgs
 )
 
 ## System dependencies are found with CMake's conventions
@@ -102,7 +102,7 @@ generate_messages(
 catkin_package(
   INCLUDE_DIRS include
   LIBRARIES igv_motion
-  CATKIN_DEPENDS roscpp std_msgs message_runtime serial
+  CATKIN_DEPENDS message_runtime roscpp serial std_msgs 
   DEPENDS system_lib
 )
 
@@ -130,8 +130,8 @@ add_library(igv_motion
 #add_dependencies(igv_motion ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Declare a C++ executable
-add_executable(igv_Motion src/MotionNode.cpp src/MotionGenerator.cpp)
-add_executable(igv_Test src/TestNode.cpp)
+add_executable(igv_Motion node/MotionNode.cpp src/MotionGenerator.cpp)
+add_executable(igv_Test node/TestNode.cpp)
 
 
 ## Add cmake target dependencies of the executable

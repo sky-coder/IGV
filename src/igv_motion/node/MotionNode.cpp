@@ -2,7 +2,7 @@
 #include <std_msgs/String.h>
 #include <iostream>
 
-#include "igv_motion/MotionGenerator.hpp"
+#include "igv_motion/MotionGenerator.h"
 #include "igv_motion/MotionMsg.h"
 
 void MotionCB(const igv_motion::MotionMsg::ConstPtr &Msg)
