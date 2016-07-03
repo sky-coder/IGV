@@ -131,7 +131,7 @@ add_library(os5000
 # add_dependencies(os5000 ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Declare a C++ executable
-add_executable(igv_OS5000 node/OS5000Node.cpp)
+add_executable(igv_OS5000 node/OS5000Node.cpp src/OS5000.cpp)
 
 ## Add cmake target dependencies of the executable
 ## same as for the library above

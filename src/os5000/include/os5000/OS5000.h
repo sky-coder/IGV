@@ -4,7 +4,10 @@
 #include <tf/transform_datatypes.h>
 
 // cpp includes
-// #include <math.h>
+#include <iostream>
+#include <sstream>
+#include <string>
+
 
 #ifndef COVARIANCE_INITIALIZER //TODO change the name
 #define COVARIANCE_INITIALIZER
@@ -15,6 +18,7 @@
 
 #endif // COVARIANCE_INITIALIZER
 
+
 #ifndef IGV_OS5000_H
 #define IGV_OS5000_H
 
@@ -24,15 +28,24 @@ class OS5000
 		OS5000();
 		~OS5000();
 
+		// Part 1
+		void getOrientation();
+		float getYaw();
+		float getPitch();
+		float getRoll();
+		
 		// Part
+		void setupSerialConnection();
 		void initializeIMU();
 
 	private:
 		sensor_msgs::Imu ImuMsg;
+		serial::Serial OSPort;
 
-		float yaw, pitch, roll, temperature;
-
-		// float OrientationElement, InvalidElement;
+		std::string RawData; //TODO get a better identifier
+		std::stringstream Orientation;
+		unsigned int position, length;
+		float yaw, pitch, roll;
 };
 
 # endif // IGV_OS5000_H
