@@ -18,38 +18,40 @@ class DPRALTE060B080
         DPRALTE060B080();
         ~DPRALTE060B080();
 		
-		// Part 1
-        void getVelocityArray();
+        // Part 1
+        void getVelocityArray();    // line 34
 
-		// Part 2
-		void resetCRC();
-		void computeCRC(int);
-        void getCRCArray();
+        // Part 2
+        void resetCRC();            // line 50
+        void computeCRC(int);       // line 57
+        void getCRCArray();         // line 77
 
-		// Part 3
-		void getWriteAccess_Left();
-		void enableBridge_Left();
-		void disableBridge_Left();
-		void setVelocity_Left(int);
+        // Part 3
+        void getWriteAccess_Left(); // line 98
+        void enableBridge_Left();   // line 105
+        void disableBridge_Left();  // line 112
+        void setVelocity_Left(int); // line 119
+        void getReadAccess_Left();  // line 135
 
-		void getWriteAccess_Right();
-		void enableBridge_Right();
-		void disableBridge_Right();
-		void setVelocity_Right(int);
+        void getWriteAccess_Right();
+        void enableBridge_Right();
+        void disableBridge_Right();
+        void setVelocity_Right(int);
+        void getReadAccess_Right();
 
-		// Part 4
-		void setConfigurationCommand(int, int, int, int, int, int, int, int,
-									 int, int, int, int);
-		void setVelocityCommand(int, int, int, int, int, int, int, int,
-								int, int, int, int, int, int);
+        // Part 4
+        void setConfigurationCommand(int, int, int, int, int, int, int, int,
+                                     int, int, int, int);
+        void setVelocityCommand(int, int, int, int, int, int, int, int,
+                                int, int, int, int, int, int);
 
-	private:
-		int velocity, highest_bit, CRCBuffer;
-		int *VelocityArray, *CRCArray;
-		unsigned int crc_accumulator, crc_poly;
+    private:
+        int velocity, highest_bit, CRCBuffer;
+        int *VelocityArray, *CRCArray;
+        unsigned int crc_accumulator, crc_poly;
 
-		serial::Serial LeftPort;
-		serial::Serial RightPort;
+        serial::Serial LeftPort;
+        serial::Serial RightPort;
 };
 
 #endif // IGV_DPRALTE060B080R_H
