@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8.3)
-project(dpralte_060b080)
+project(dpralte060b080)
 
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
@@ -47,7 +47,7 @@ find_package(catkin REQUIRED COMPONENTS
 ## Generate messages in the 'msg' folder
 add_message_files(
   FILES
-  MotorMsg.msg
+  DPRALTE060B080_Msg.msg
 )
 
 ## Generate services in the 'srv' folder
@@ -101,7 +101,7 @@ generate_messages(
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
   INCLUDE_DIRS include
-  LIBRARIES dpralte_060b080
+  LIBRARIES dpralte060b080
   CATKIN_DEPENDS message_runtime roscpp serial std_msgs 
   DEPENDS system_lib
 )
@@ -119,7 +119,7 @@ include_directories(
 )
 
 ## Declare a C++ library
-add_library(dpralte_060b080
+add_library(dpralte060b080
 #  src/${PROJECT_NAME}/dpralte_060b080.cpp
   src/DPRALTE060B080.cpp
 )
@@ -130,15 +130,15 @@ add_library(dpralte_060b080
 #add_dependencies(dpralte_060b080 ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Declare a C++ executable
-add_executable(igv_Motor node/MotorNode.cpp src/DPRALTE060B080.cpp)
+add_executable(igv_DPRALTE060B080 node/DPRALTE060B080_Node.cpp src/DPRALTE060B080.cpp)
 
 
 ## Add cmake target dependencies of the executable
 ## same as for the library above
-add_dependencies(igv_Motor ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+add_dependencies(igv_DPRALTE060B080 ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Specify libraries to link a library or executable target against
-target_link_libraries(igv_Motor ${catkin_LIBRARIES})
+target_link_libraries(igv_DPRALTE060B080 ${catkin_LIBRARIES})
 
 #############
 ## Install ##

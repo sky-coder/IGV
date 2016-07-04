@@ -1,0 +1,12 @@
+<launch>
+    <machine name="IGV@RASSL"
+             address="localhost" />
+
+    <node machine="IGV@RASSL"
+          pkg="dpralte060b080"
+          type="igv_DPRALTE060B080"
+          name="igv_DPRALTE060B080_Node"
+          output="screen"
+          required="true" />
+
+</launch>
