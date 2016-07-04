@@ -1,7 +1,8 @@
+// ros includes
 #include <serial/serial.h>
 
-#ifndef MOTIONGENERATOR_H
-#define MOTIONGENERATOR_H
+#ifndef IGV_DPRALTE060B080_H
+#define IGV_DPRALTE060B080_H
 
 #define LEFT_PORT "/dev/ttyUSB0"
 #define RIGHT_PORT "/dev/ttyUSB1"
@@ -11,11 +12,11 @@
 static uint8_t ConfigurationCommand[12];
 static uint8_t VelocityCommand[14];
 
-class MotionGenerator
+class DPRALTE060B080
 {
     public:
-        MotionGenerator();
-        virtual ~MotionGenerator();
+        DPRALTE060B080();
+        ~DPRALTE060B080();
 		
 		// Part 1
         void getVelocityArray();
@@ -51,4 +52,4 @@ class MotionGenerator
 		serial::Serial RightPort;
 };
 
-#endif // MOTIONGENERATOR_H
+#endif // IGV_DPRALTE060B080R_H

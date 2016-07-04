@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8.3)
-project(igv_motion)
+project(dpralte_060b080)
 
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
@@ -47,7 +47,7 @@ find_package(catkin REQUIRED COMPONENTS
 ## Generate messages in the 'msg' folder
 add_message_files(
   FILES
-  MotionMsg.msg
+  MotorMsg.msg
 )
 
 ## Generate services in the 'srv' folder
@@ -101,7 +101,7 @@ generate_messages(
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
   INCLUDE_DIRS include
-  LIBRARIES igv_motion
+  LIBRARIES dpralte_060b080
   CATKIN_DEPENDS message_runtime roscpp serial std_msgs 
   DEPENDS system_lib
 )
@@ -119,29 +119,26 @@ include_directories(
 )
 
 ## Declare a C++ library
-add_library(igv_motion
-#  src/${PROJECT_NAME}/igv_motion.cpp
-  src/MotionGenerator.cpp
+add_library(dpralte_060b080
+#  src/${PROJECT_NAME}/dpralte_060b080.cpp
+  src/DPRALTE060B080.cpp
 )
 
 ## Add cmake target dependencies of the library
 ## as an example, code may need to be generated before libraries
 ## either from message generation or dynamic reconfigure
-#add_dependencies(igv_motion ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+#add_dependencies(dpralte_060b080 ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Declare a C++ executable
-add_executable(igv_Motion node/MotionNode.cpp src/MotionGenerator.cpp)
-add_executable(igv_Test node/TestNode.cpp)
+add_executable(igv_Motor node/MotorNode.cpp src/DPRALTE060B080.cpp)
 
 
 ## Add cmake target dependencies of the executable
 ## same as for the library above
-add_dependencies(igv_Motion ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
-add_dependencies(igv_Test ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+add_dependencies(igv_Motor ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Specify libraries to link a library or executable target against
-target_link_libraries(igv_Motion ${catkin_LIBRARIES})
-target_link_libraries(igv_Test ${catkin_LIBRARIES})
+target_link_libraries(igv_Motor ${catkin_LIBRARIES})
 
 #############
 ## Install ##
@@ -158,7 +155,7 @@ target_link_libraries(igv_Test ${catkin_LIBRARIES})
 # )
 
 ## Mark executables and/or libraries for installation
-# install(TARGETS igv_motion igv_motion_node
+# install(TARGETS dpralte_060b080 dpralte_060b080_node
 #   ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
 #   LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
 #   RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
@@ -183,7 +180,7 @@ target_link_libraries(igv_Test ${catkin_LIBRARIES})
 #############
 
 ## Add gtest based cpp test target and link libraries
-# catkin_add_gtest(${PROJECT_NAME}-test test/test_igv_motion.cpp)
+# catkin_add_gtest(${PROJECT_NAME}-test test/test_dpralte_060b080.cpp)
 # if(TARGET ${PROJECT_NAME}-test)
 #   target_link_libraries(${PROJECT_NAME}-test ${PROJECT_NAME})
 # endif()

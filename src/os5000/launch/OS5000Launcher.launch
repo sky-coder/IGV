@@ -1,0 +1,6 @@
+<launch> 
+
+	<node pkg="os5000" type="igv_OS5000" name="igv_OS5000Node" output="screen" 
+		  required="true" />
+
+</launch>

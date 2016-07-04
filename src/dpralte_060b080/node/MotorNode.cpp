@@ -1,11 +1,13 @@
+// ros includes
 #include <ros/ros.h>
 #include <std_msgs/String.h>
+#include "dpralte_060b080/MotorMsg.h"
+
+// cpp includes
 #include <iostream>
+#include "dpralte_060b080/DPRALTE060B080.h"
 
-#include "igv_motion/MotionGenerator.h"
-#include "igv_motion/MotionMsg.h"
-
-void MotionCB(const igv_motion::MotionMsg::ConstPtr &Msg)
+void MotorCB(const dpralte_060b080::MotorMsg::ConstPtr &Msg)
 {
 	std::cout << "left velocity is:" << Msg->velocity_left << std::endl;
 	std::cout << "right velocity is:" << Msg->velocity_left << std::endl;
@@ -14,14 +16,14 @@ void MotionCB(const igv_motion::MotionMsg::ConstPtr &Msg)
 
 int main(int argc, char **argv)
 {
-	ros::init(argc, argv, "igv_MotionNode");
+	ros::init(argc, argv, "igv_MotorNode");
 	ros::NodeHandle nh;
-	ros::Publisher Pub = nh.advertise<igv_motion::MotionMsg>("MotionSignal", 100);
-	ros::Subscriber Sub = nh.subscribe("MotionSignal", 100, MotionCB);
+	ros::Publisher Pub = nh.advertise<dpralte_060b080::MotorMsg>("MotorSignal", 100);
+	ros::Subscriber Sub = nh.subscribe("MotorSignal", 100, MotorCB);
 	ros::Rate loop_rate(10);
 
-	MotionGenerator IGV;
-	igv_motion::MotionMsg Msg;
+	DPRALTE060B080 IGV;
+	dpralte_060b080::MotorMsg Msg;
 
 	int i = 10;
 
