@@ -122,7 +122,7 @@ include_directories(
 
 ## Declare a C++ library
 add_library(os5000
-	src/OS5000.cpp
+  src/OS5000.cpp
 )
 
 ## Add cmake target dependencies of the library

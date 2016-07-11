@@ -24,28 +24,28 @@
 
 class OS5000
 {
-	public:
-		OS5000();
-		~OS5000();
+    public:
+        OS5000();
+        ~OS5000();
 
-		// Part 1
-		void getOrientation();
-		float getYaw();
-		float getPitch();
-		float getRoll();
-		
-		// Part
-		void setupSerialConnection();
-		void initializeIMU();
+        // Part 1
+        void getOrientation();
+        float getYaw();
+        float getPitch();
+        float getRoll();
+        
+        // Part
+        void setupSerialConnection();
+        void initializeIMU();
 
-	private:
-		sensor_msgs::Imu ImuMsg;
-		serial::Serial OSPort;
+    private:
+        sensor_msgs::Imu ImuMsg;
+        serial::Serial OSPort;
 
-		std::string RawData; //TODO get a better identifier
-		std::stringstream Orientation;
-		unsigned int position, length;
-		float yaw, pitch, roll;
+        std::string RawData; //TODO get a better identifier
+        std::stringstream Orientation;
+        unsigned int position, length;
+        float yaw, pitch, roll;
 };
 
 # endif // IGV_OS5000_H

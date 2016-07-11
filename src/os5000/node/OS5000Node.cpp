@@ -8,22 +8,22 @@ int count = 10;
 
 int main(int argc, char **argv)
 {
-	ros::init(argc, argv, "OS5000_Node");
-	ros::start();
-	ros::Rate loop_rate(10);
+    ros::init(argc, argv, "OS5000_Node");
+    ros::start();
+    ros::Rate loop_rate(10);
 
-	OS5000 Compass;
+    OS5000 Compass;
 
-	while(count)
-	{
-		Compass.getOrientation();
+    while(count)
+    {
+        Compass.getOrientation();
 
-		count--;
-		ros::spinOnce();
-		loop_rate.sleep();
-	}
+        count--;
+        ros::spinOnce();
+        loop_rate.sleep();
+    }
 
-	ros::shutdown();
+    ros::shutdown();
 
-	return 0;
+    return 0;
 }
