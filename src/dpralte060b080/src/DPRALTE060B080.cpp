@@ -8,7 +8,7 @@ DPRALTE060B080::DPRALTE060B080()
     OdometryArray = new uint8_t[4];
 
     DPRALTE060B080::setupSerialCommunication();
-    DPRALTE060B080::setupMsgMonitoring();
+    // DPRALTE060B080::setupMsgMonitoring();
 }
 
 DPRALTE060B080::~DPRALTE060B080()
@@ -31,6 +31,7 @@ void DPRALTE060B080::getWriteAccess_Left()
     DPRALTE060B080::setWriteToDriver(0xa5, 0x3e, 0x02, 0x07, 0x00, 0x01, 0x19, 0xb6,
                                      0xff, 0x00, 0x03, 0xff);
     LeftPort.write(WriteToDriver, WRITE_TO_LENGTH);
+    LeftPort.read(FlagBuffer, FLAG_BUF_LENGTH);
 }
 
 void DPRALTE060B080::enableBridge_Left()
@@ -38,6 +39,7 @@ void DPRALTE060B080::enableBridge_Left()
     DPRALTE060B080::setWriteToDriver(0xa5, 0x3e, 0x02, 0x01, 0x00, 0x01, 0xab, 0x16,
                                      0x00, 0x00, 0x00, 0x00);
     LeftPort.write(WriteToDriver, WRITE_TO_LENGTH);
+    LeftPort.read(FlagBuffer, FLAG_BUF_LENGTH);
 }
 
 void DPRALTE060B080::disableBridge_Left()
@@ -45,6 +47,7 @@ void DPRALTE060B080::disableBridge_Left()
     DPRALTE060B080::setWriteToDriver(0xa5, 0x3e, 0x02, 0x01, 0x00, 0x01, 0xab, 0x16,
                                      0x01, 0x00, 0x33, 0x31);
     LeftPort.write(WriteToDriver, WRITE_TO_LENGTH);
+    LeftPort.read(FlagBuffer, FLAG_BUF_LENGTH);
 }
 
 void DPRALTE060B080::setVelocity_Left(int vel_in)
@@ -61,19 +64,28 @@ void DPRALTE060B080::setVelocity_Left(int vel_in)
                                       CRCArray[0],
                                       CRCArray[1]);
     LeftPort.write(VelocityTarget, VEL_CMD_LENGTH);
+    LeftPort.read(FlagBuffer, FLAG_BUF_LENGTH);
 }
 
 void DPRALTE060B080::getReadAccess_Left()
 {
     DPRALTE060B080::setReadFromDriver(0xa5, 0x3e, 0x01, 0x07, 0x00, 0x01, 0x82, 0x6a);
     LeftPort.write(ReadFromDriver, READ_FROM_LENGTH);
+    LeftPort.read(FlagBuffer, FLAG_BUF_LENGTH);
 }
 
 int DPRALTE060B080::getOdometry_Left()
 {
     DPRALTE060B080::setReadFromDriver(0xa5, 0x3e, 0x01, 0x12, 0x00, 0x02, 0x1a, 0x9a);
     LeftPort.write(ReadFromDriver, READ_FROM_LENGTH);
-    LeftPort.read(RxBuffer, RX_BUF_LENGTH);
+    LeftPort.read(OdoBuffer, ODO_BUF_LENGTH);
+
+
+    std::cout << "The Odo Buffer is: " << std::endl;
+    for(int i =0; i < ODO_BUF_LENGTH; i++){
+        std::cout << std::hex << signed(OdoBuffer[i]) << " ";
+    }
+    std::cout << std::endl;
 
     DPRALTE060B080::converttoOdometry();
     return odometry;
@@ -84,6 +96,7 @@ void DPRALTE060B080::getWriteAccess_Right()
     DPRALTE060B080::setWriteToDriver(0xa5, 0x3f, 0x02, 0x07, 0x00, 0x01, 0xb3, 0xe7,
                                      0xff, 0x00, 0x03, 0xff);
     RightPort.write(WriteToDriver, WRITE_TO_LENGTH);
+    RightPort.read(FlagBuffer, FLAG_BUF_LENGTH);
 }
 
 void DPRALTE060B080::enableBridge_Right()
@@ -91,6 +104,7 @@ void DPRALTE060B080::enableBridge_Right()
     DPRALTE060B080::setWriteToDriver(0xa5, 0x3f, 0x02, 0x01, 0x00, 0x01, 0x01, 0x47,
                                      0x00, 0x00, 0x00, 0x00);
     RightPort.write(WriteToDriver, WRITE_TO_LENGTH);
+    RightPort.read(FlagBuffer, FLAG_BUF_LENGTH);
 }
 
 void DPRALTE060B080::disableBridge_Right()
@@ -98,6 +112,7 @@ void DPRALTE060B080::disableBridge_Right()
     DPRALTE060B080::setWriteToDriver(0xa5, 0x3f, 0x02, 0x01, 0x00, 0x01, 0x01, 0x47,
                                      0x01, 0x00, 0x33, 0x31);
     RightPort.write(WriteToDriver, WRITE_TO_LENGTH);
+    RightPort.read(FlagBuffer, FLAG_BUF_LENGTH);
 }
 
 void DPRALTE060B080::setVelocity_Right(int vel_in)
@@ -114,19 +129,21 @@ void DPRALTE060B080::setVelocity_Right(int vel_in)
                                       CRCArray[0],
                                       CRCArray[1]);
     RightPort.write(VelocityTarget, VEL_CMD_LENGTH);
+    RightPort.read(FlagBuffer, FLAG_BUF_LENGTH);
 }
 
 void DPRALTE060B080::getReadAccess_Right()
 {
     DPRALTE060B080::setReadFromDriver(0xa5, 0x3f, 0x01, 0x07, 0x00, 0x01, 0x28, 0x3b);
-    LeftPort.write(ReadFromDriver, READ_FROM_LENGTH);
+    RightPort.write(ReadFromDriver, READ_FROM_LENGTH);
+    RightPort.read(FlagBuffer, FLAG_BUF_LENGTH);
 }
 
 int DPRALTE060B080::getOdometry_Right()
 {
     DPRALTE060B080::setReadFromDriver(0xa5, 0x3f, 0x01, 0x12, 0x00, 0x02, 0xb0, 0xcb);
-    LeftPort.write(ReadFromDriver, READ_FROM_LENGTH);
-    LeftPort.read(RxBuffer, RX_BUF_LENGTH);
+    RightPort.write(ReadFromDriver, READ_FROM_LENGTH);
+    RightPort.read(OdoBuffer, ODO_BUF_LENGTH);
 
     DPRALTE060B080::converttoOdometry();
     return odometry;
@@ -202,7 +219,10 @@ void DPRALTE060B080::converttoOdometry()
     odometry = 0;
 
     for(int i = 0; i < 4; i++){
-        OdometryArray[i] = RxBuffer[8+i];
+        OdometryArray[i] = OdoBuffer[8+i];
+
+        Odo_ss.str(std::string());
+        Odo_ss.clear();
         Odo_ss << std::hex << (OdometryArray[i] << (8*i));
         Odo_ss >> temp;
 
@@ -291,17 +311,18 @@ void DPRALTE060B080::setupSerialCommunication()
     RightPort.open();
 }
 
-void DPRALTE060B080::setupMsgMonitoring()
-{
-    Pub = nh.advertise<dpralte060b080::DPRALTE060B080_Msg>("MotorMsg", 100);
-    Sub = nh.subscribe("MotorMsg", 100, &DPRALTE060B080::CallBack, this);
-}
-
-void DPRALTE060B080::CallBack(const dpralte060b080::DPRALTE060B080_Msg::ConstPtr &Msg)
-{
-    Pub.publish(Msg);
-    ROS_INFO("left velocity is: %d", Msg->velocity_left);
-    ROS_INFO("right velocity is: %d", Msg->velocity_right);
-    ROS_INFO("left odometry is: %d", Msg->odometry_left);
-    ROS_INFO("right odometry is: %d", Msg->odometry_right);
-}
+// void DPRALTE060B080::setupMsgMonitoring()
+// {
+//     Pub = nh.advertise<dpralte060b080::DPRALTE060B080_Msg>("MotorMsg", 100);
+//     Sub = nh.subscribe("MotorMsg", 100, &DPRALTE060B080::CallBack, this);
+//     Pub.publish(Msg);
+//     ROS_INFO_STREAM("Message Monitoring has been set up.");
+// }
+// 
+// void DPRALTE060B080::CallBack(const dpralte060b080::DPRALTE060B080_Msg::ConstPtr &Msg)
+// {
+//     ROS_INFO("left velocity is: %d", Msg->velocity_left);
+//     ROS_INFO("right velocity is: %d", Msg->velocity_right);
+//     ROS_INFO("left odometry is: %d", Msg->odometry_left);
+//     ROS_INFO("right odometry is: %d", Msg->odometry_right);
+// }

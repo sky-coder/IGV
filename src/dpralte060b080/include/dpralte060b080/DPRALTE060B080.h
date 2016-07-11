@@ -5,6 +5,7 @@
 
 // cpp includes
 #include <sstream>
+#include <string>
 
 #ifndef IGV_DPRALTE060B080_H
 #define IGV_DPRALTE060B080_H
@@ -18,7 +19,8 @@
 #define WRITE_TO_LENGTH  12
 #define READ_FROM_LENGTH  8
 #define VEL_CMD_LENGTH   14
-#define RX_BUF_LENGTH    14
+#define FLAG_BUF_LENGTH   8
+#define ODO_BUF_LENGTH   14
 
 #endif // IGV_DPRALTE060B080_SERIAL_PARAM
 
@@ -26,7 +28,8 @@
 static uint8_t WriteToDriver[WRITE_TO_LENGTH];
 static uint8_t ReadFromDriver[READ_FROM_LENGTH];
 static uint8_t VelocityTarget[VEL_CMD_LENGTH];
-static uint8_t RxBuffer[RX_BUF_LENGTH];
+static uint8_t FlagBuffer[FLAG_BUF_LENGTH];
+static uint8_t OdoBuffer[ODO_BUF_LENGTH];
 
 
 class DPRALTE060B080
@@ -80,15 +83,16 @@ class DPRALTE060B080
                                unsigned int, unsigned int);
 
         // Part 6
-        dpralte060b080::DPRALTE060B080_Msg Msg;
 
     private:
+        // Part 6
         serial::Serial LeftPort;
         serial::Serial RightPort;
+        void setupSerialCommunication();
 
-        ros::NodeHandle nh;
-        ros::Publisher Pub;
-        ros::Subscriber Sub;
+        // ros::NodeHandle nh;
+        // ros::Publisher Pub;
+        // ros::Subscriber Sub;
 
         int velocity;
         int *VelocityArray;
@@ -100,10 +104,8 @@ class DPRALTE060B080
         uint8_t *OdometryArray;
         std::stringstream Odo_ss;
 
-        // Part 6
-        void setupSerialCommunication();
-        void setupMsgMonitoring();
-        void CallBack(const dpralte060b080::DPRALTE060B080_Msg::ConstPtr &Msg);
+        // void setupMsgMonitoring();
+        // void CallBack(const dpralte060b080::DPRALTE060B080_Msg::ConstPtr &Msg);
 };
 
 #endif // IGV_DPRALTE060B080R_H
