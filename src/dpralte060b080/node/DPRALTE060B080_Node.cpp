@@ -40,7 +40,7 @@ int main(int argc, char **argv)
         IGV.enableBridge_Left();
         IGV.enableBridge_Right();
         ROS_INFO_STREAM("Bridge Enabled.");
-        ros::Duration(3).sleep();
+        ros::Duration(6.2).sleep();
 
         IGV.disableBridge_Left();
         IGV.disableBridge_Right();
@@ -49,8 +49,8 @@ int main(int argc, char **argv)
         Msg.odometry_left = IGV.getOdometry_Left();
         Msg.odometry_right = IGV.getOdometry_Right();
 
-        std::cout << "Left odometry is: " << std::dec << Msg.odometry_left << std::endl;
-        std::cout << "Right odometry is: " << std::dec << Msg.odometry_right << std::endl;
+        std::cout << "Left odometry is: " << Msg.odometry_left << std::endl;
+        std::cout << "Right odometry is: " << Msg.odometry_right << std::endl;
 
         ros::spinOnce();
         loop_rate.sleep();

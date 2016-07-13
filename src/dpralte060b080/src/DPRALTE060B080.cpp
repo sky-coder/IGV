@@ -11,10 +11,12 @@ DPRALTE060B080::DPRALTE060B080()
     DPRALTE060B080::setupSerialCommunication();
     // DPRALTE060B080::setupMsgMonitoring();
 
-    DPRALTE060B080::getReadAccess_Left();
-    DPRALTE060B080::getReadAccess_Right();
+    // DPRALTE060B080::getReadAccess_Left();
+    // DPRALTE060B080::getReadAccess_Right();
     home_left = DPRALTE060B080::getOdometry_Left();
     home_right = DPRALTE060B080::getOdometry_Right();
+    // std::cout << "home of left is: " << home_left << std::endl;
+    // std::cout << "home of right is: " << home_right << std::endl;
 }
 
 DPRALTE060B080::~DPRALTE060B080()
@@ -59,7 +61,7 @@ void DPRALTE060B080::disableBridge_Left()
 void DPRALTE060B080::setVelocity_Left(int vel_in)
 {
     velocity = vel_in;
-    DPRALTE060B080::getVelocityArray();
+    // DPRALTE060B080::getVelocityArray();
     DPRALTE060B080::getCRCArray();
 
     DPRALTE060B080::setVelocityTarget(0xa5, 0x3e, 0x02, 0x45, 0x00, 0x02, 0x5a, 0x18,
@@ -73,12 +75,12 @@ void DPRALTE060B080::setVelocity_Left(int vel_in)
     LeftPort.read(FlagBuffer, FLAG_BUF_LENGTH);
 }
 
-void DPRALTE060B080::getReadAccess_Left()
-{
-    DPRALTE060B080::setReadFromDriver(0xa5, 0x3e, 0x01, 0x07, 0x00, 0x01, 0x82, 0x6a);
-    LeftPort.write(ReadFromDriver, READ_FROM_LENGTH);
-    LeftPort.read(FlagBuffer, FLAG_BUF_LENGTH);
-}
+// void DPRALTE060B080::getReadAccess_Left()
+// {
+//     DPRALTE060B080::setReadFromDriver(0xa5, 0x3e, 0x01, 0x07, 0x00, 0x01, 0x82, 0x6a);
+//     LeftPort.write(ReadFromDriver, READ_FROM_LENGTH);
+//     LeftPort.read(FlagBuffer, FLAG_BUF_LENGTH);
+// }
 
 int DPRALTE060B080::getOdometry_Left()
 {
@@ -123,7 +125,7 @@ void DPRALTE060B080::disableBridge_Right()
 void DPRALTE060B080::setVelocity_Right(int vel_in)
 {
     velocity = vel_in;
-    DPRALTE060B080::getVelocityArray();
+    // DPRALTE060B080::getVelocityArray();
     DPRALTE060B080::getCRCArray();
 	
     DPRALTE060B080::setVelocityTarget(0xa5, 0x3f, 0x02, 0x45, 0x02, 0x02, 0x96, 0x2b,
@@ -137,12 +139,12 @@ void DPRALTE060B080::setVelocity_Right(int vel_in)
     RightPort.read(FlagBuffer, FLAG_BUF_LENGTH);
 }
 
-void DPRALTE060B080::getReadAccess_Right()
-{
-    DPRALTE060B080::setReadFromDriver(0xa5, 0x3f, 0x01, 0x07, 0x00, 0x01, 0x28, 0x3b);
-    RightPort.write(ReadFromDriver, READ_FROM_LENGTH);
-    RightPort.read(FlagBuffer, FLAG_BUF_LENGTH);
-}
+// void DPRALTE060B080::getReadAccess_Right()
+// {
+//     DPRALTE060B080::setReadFromDriver(0xa5, 0x3f, 0x01, 0x07, 0x00, 0x01, 0x28, 0x3b);
+//     RightPort.write(ReadFromDriver, READ_FROM_LENGTH);
+//     RightPort.read(FlagBuffer, FLAG_BUF_LENGTH);
+// }
 
 int DPRALTE060B080::getOdometry_Right()
 {
@@ -228,8 +230,9 @@ void DPRALTE060B080::converttoOdometry()
 
         Odo_ss.str(std::string());
         Odo_ss.clear();
-        Odo_ss << std::hex << (OdometryArray[i] << (8*i));
+        Odo_ss /*<< std::hex*/ << (OdometryArray[i] << (8*i));
         Odo_ss >> temp;
+        std::cout << "temp is: " << temp << std::endl;
 
         odometry += temp;
     }

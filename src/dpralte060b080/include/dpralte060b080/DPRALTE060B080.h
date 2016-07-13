@@ -54,7 +54,7 @@ class DPRALTE060B080
         void disableBridge_Right();  // line
         void setVelocity_Right(int); // line
 
-        void getReadAccess_Right();  // line
+        // void getReadAccess_Right();  // line
         int getOdometry_Right();     // line
 
         // Part 2
