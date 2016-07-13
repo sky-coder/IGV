@@ -2,6 +2,7 @@
 #include "dpralte060b080/DPRALTE060B080.h"
 
 DPRALTE060B080::DPRALTE060B080()
+    :home_left(0), home_right(0)
 {
     VelocityArray = new int[4];
     CRCArray = new unsigned int[2];
@@ -9,6 +10,11 @@ DPRALTE060B080::DPRALTE060B080()
 
     DPRALTE060B080::setupSerialCommunication();
     // DPRALTE060B080::setupMsgMonitoring();
+
+    DPRALTE060B080::getReadAccess_Left();
+    DPRALTE060B080::getReadAccess_Right();
+    home_left = DPRALTE060B080::getOdometry_Left();
+    home_right = DPRALTE060B080::getOdometry_Right();
 }
 
 DPRALTE060B080::~DPRALTE060B080()
@@ -80,15 +86,14 @@ int DPRALTE060B080::getOdometry_Left()
     LeftPort.write(ReadFromDriver, READ_FROM_LENGTH);
     LeftPort.read(OdoBuffer, ODO_BUF_LENGTH);
 
-
-    std::cout << "The Odo Buffer is: " << std::endl;
-    for(int i =0; i < ODO_BUF_LENGTH; i++){
-        std::cout << std::hex << signed(OdoBuffer[i]) << " ";
-    }
-    std::cout << std::endl;
+    // std::cout << "The Odo Buffer is: " << std::endl;
+    // for(int i = 0; i < ODO_BUF_LENGTH; i++){
+    //     std::cout << std::hex << signed(OdoBuffer[i]) << " ";
+    // }
+    // std::cout << std::endl;
 
     DPRALTE060B080::converttoOdometry();
-    return odometry;
+    return odometry - home_left;
 }
 //----------------------------------------------------------------------- Right
 void DPRALTE060B080::getWriteAccess_Right()
@@ -146,7 +151,7 @@ int DPRALTE060B080::getOdometry_Right()
     RightPort.read(OdoBuffer, ODO_BUF_LENGTH);
 
     DPRALTE060B080::converttoOdometry();
-    return odometry;
+    return odometry - home_right;
 }
 
 

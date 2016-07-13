@@ -100,7 +100,7 @@ class DPRALTE060B080
         unsigned int crc_accumulator, crc_poly, crc_buffer, crc_highest_bit;
         unsigned int *CRCArray;
 
-        int odometry, temp;
+        int home_left, home_right, odometry, temp;
         uint8_t *OdometryArray;
         std::stringstream Odo_ss;
 
