@@ -5,10 +5,11 @@ project(dpralte060b080)
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
-  message_generation
-  roscpp
-  serial
-  std_msgs
+    geometry_msgs
+    message_generation
+    roscpp
+    serial
+    std_msgs
 )
 
 ## System dependencies are found with CMake's conventions
@@ -46,8 +47,8 @@ find_package(catkin REQUIRED COMPONENTS
 
 ## Generate messages in the 'msg' folder
 add_message_files(
-  FILES
-  DPRALTE060B080_Msg.msg
+    FILES
+    DPRALTE060B080_Msg.msg
 )
 
 ## Generate services in the 'srv' folder
@@ -66,8 +67,8 @@ add_message_files(
 
 ## Generate added messages and services with any dependencies listed here
 generate_messages(
-  DEPENDENCIES
-  std_msgs
+    DEPENDENCIES
+    std_msgs
 )
 
 ################################################
@@ -100,10 +101,10 @@ generate_messages(
 ## CATKIN_DEPENDS: catkin_packages dependent projects also need
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
-  INCLUDE_DIRS include
-  LIBRARIES dpralte060b080
-  CATKIN_DEPENDS message_runtime roscpp serial std_msgs 
-  DEPENDS system_lib
+    INCLUDE_DIRS include
+    LIBRARIES dpralte060b080
+    CATKIN_DEPENDS geometry_msgs message_runtime roscpp serial std_msgs 
+    DEPENDS system_lib
 )
 
 ###########
@@ -114,14 +115,14 @@ catkin_package(
 ## Your package locations should be listed before other locations
 # include_directories(include)
 include_directories(
-  include
-  ${catkin_INCLUDE_DIRS}
+    include
+    ${catkin_INCLUDE_DIRS}
 )
 
 ## Declare a C++ library
 add_library(dpralte060b080
 #  src/${PROJECT_NAME}/dpralte_060b080.cpp
-  src/DPRALTE060B080.cpp
+    src/DPRALTE060B080.cpp
 )
 
 ## Add cmake target dependencies of the library
@@ -131,14 +132,17 @@ add_library(dpralte060b080
 
 ## Declare a C++ executable
 add_executable(igv_DPRALTE060B080 node/DPRALTE060B080_Node.cpp src/DPRALTE060B080.cpp)
+add_executable(igv_Demo node/Demo_Node.cpp src/DPRALTE060B080.cpp)
 
 
 ## Add cmake target dependencies of the executable
 ## same as for the library above
 add_dependencies(igv_DPRALTE060B080 ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+add_dependencies(igv_Demo ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Specify libraries to link a library or executable target against
 target_link_libraries(igv_DPRALTE060B080 ${catkin_LIBRARIES})
+target_link_libraries(igv_Demo ${catkin_LIBRARIES})
 
 #############
 ## Install ##
