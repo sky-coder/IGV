@@ -299,7 +299,7 @@ void DPRALTE060B080::converttoOdometry()
         Odo_ss.clear();
         Odo_ss /*<< std::hex*/ << (OdometryArray[i] << (8*i));
         Odo_ss >> temp;
-        std::cout << "temp is: " << temp << std::endl;
+        // std::cout << "temp is: " << temp << std::endl;
 
         odometry += temp;
     }
