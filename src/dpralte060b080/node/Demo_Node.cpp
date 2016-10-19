@@ -53,14 +53,14 @@ int main(int argc, char **argv)
             case 2:
                 Twist_msg.linear.x = 0.0;
                 Twist_msg.angular.z = M_PI / 3;
-                demo_duration = 6;
+                demo_duration = 2;
                 std::cout << "Linear velocity (m/s): " << Twist_msg.linear.x << "\n";
                 std::cout << "Angular velocity (rad/s): " << Twist_msg.angular.z << "\n";
                 break;
             case 3:
                 Twist_msg.linear.x = 0.5;
                 Twist_msg.angular.z = M_PI / 3;
-                demo_duration = 2;
+                demo_duration = 4;
                 std::cout << "Linear velocity (m/s): " << Twist_msg.linear.x << "\n";
                 std::cout << "Angular velocity (rad/s): " << Twist_msg.angular.z << "\n";
                 break;
@@ -90,6 +90,8 @@ int main(int argc, char **argv)
             std::cerr << "Exception caught: " << e.what() << std::endl;
         }
 
+        ros::Duration(5).sleep(); // make time for holding my cellphone camera :p
+
         IGV.getWriteAccess_Left();
         IGV.getWriteAccess_Right();
         std::cout << "Write Access Got." << std::endl;
@@ -98,8 +100,8 @@ int main(int argc, char **argv)
         IGV.setVelocity_Right(velocity_right);
         std::cout << "Positive Velocity Set." << std::endl;
 
-        IGV.enableBridge_Left();
         IGV.enableBridge_Right();
+        IGV.enableBridge_Left();
         std::cout << "Bridge Enabled." << std::endl;
         ros::Duration(demo_duration).sleep();
 
@@ -108,20 +110,20 @@ int main(int argc, char **argv)
         std::cout << "Zero Velocity Set." << std::endl;
         ros::Duration(1).sleep();
 
-        IGV.setVelocity_Left(-velocity_left);
-        IGV.setVelocity_Right(-velocity_right);
-        std::cout << "Negative Velocity Set." << std::endl;
-        ros::Duration(demo_duration).sleep();
+        // IGV.setVelocity_Left(-velocity_left);
+        // IGV.setVelocity_Right(-velocity_right);
+        // std::cout << "Negative Velocity Set." << std::endl;
+        // ros::Duration(demo_duration).sleep();
 
         IGV.disableBridge_Left();
         IGV.disableBridge_Right();
         ROS_INFO_STREAM("Bridge Disabled.");
 
-        odometry_left = IGV.getOdometry_Left();
-        odometry_right = IGV.getOdometry_Right();
+        // odometry_left = IGV.getOdometry_Left();
+        // odometry_right = IGV.getOdometry_Right();
 
-        std::cout << "Left odometry is: " << odometry_left << std::endl;
-        std::cout << "Right odometry is: " << odometry_right << std::endl;
+        // std::cout << "Left odometry is: " << odometry_left << std::endl;
+        // std::cout << "Right odometry is: " << odometry_right << std::endl;
 
         ros::spinOnce();
         loop_rate.sleep();
