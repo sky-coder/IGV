@@ -20,7 +20,7 @@ void OS5000::getOrientation()
     while(1)
     {
         RawData.clear();
-        RawData = OSPort.readline(22, "\n");
+        RawData = OSPort.readline(23, "\n");
 
         if(RawData.find("$") == std::string::npos || RawData.find("$") != 0)
         {
