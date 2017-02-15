@@ -1,4 +1,5 @@
 #include "os5000/OS5000.h"
+#include <ros/ros.h>
 
 OS5000::OS5000()
     :yaw(-1.0f), pitch(-1.0f), roll(-1.0f)
@@ -44,7 +45,7 @@ void OS5000::getOrientation()
         length = RawData.find("P") - RawData.find("C") - 1;
         Orientation << RawData.substr(position, length);
         Orientation >> yaw;
-        ROS_INFO("Yaw is: %f", yaw);
+       // ROS_INFO("Yaw is: %f", yaw);
 
         Orientation.str(std::string());
         Orientation.clear();
@@ -52,7 +53,7 @@ void OS5000::getOrientation()
         length = RawData.find("R") - RawData.find("P") - 1;
         Orientation << RawData.substr(position, length);
         Orientation >> pitch;
-        ROS_INFO("Pitch is: %f", pitch);
+        //ROS_INFO("Pitch is: %f", pitch);
 
         Orientation.str(std::string());
         Orientation.clear();
@@ -60,10 +61,13 @@ void OS5000::getOrientation()
         length = RawData.find("*") - RawData.find("R") - 1;
         Orientation << RawData.substr(position, length);
         Orientation >> roll;
-        ROS_INFO("Roll is: %f\n", roll);
+        //ROS_INFO("Roll is: %f\n", roll);
+
+        ROS_INFO("Data: (%f, %f, %f)\n",yaw, pitch, roll);
 
         break;
     }
+    //ros::shutdown();
 }
 
 float OS5000::getYaw()
@@ -84,7 +88,7 @@ float OS5000::getRoll()
 //============================================================================= Part
 void OS5000::setupSerialConnection()
 {
-    OSPort.setPort("/dev/ttyUSB0");
+    OSPort.setPort("/dev/ttyUSB1");
     OSPort.setBaudrate(9600);
     serial::Timeout to = serial::Timeout::simpleTimeout(1000);
     OSPort.setTimeout(to);

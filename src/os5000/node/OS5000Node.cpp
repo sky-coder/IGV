@@ -1,10 +1,15 @@
 // ros includes
 #include <ros/ros.h>
+#include <signal.h>
 
 // cpp includes
 #include "os5000/OS5000.h"
 
-int count = 10;
+//int count = 10;
+void intHandle(int sig)
+{
+    ros::shutdown();
+}
 
 int main(int argc, char **argv)
 {
@@ -14,16 +19,15 @@ int main(int argc, char **argv)
 
     OS5000 Compass;
 
-    while(count)
+    while(ros::ok)
     {
         Compass.getOrientation();
 
-        count--;
+        //count--;
+        //signal(SIGINT, intHandle);
         ros::spinOnce();
         loop_rate.sleep();
     }
-
-    ros::shutdown();
 
     return 0;
 }

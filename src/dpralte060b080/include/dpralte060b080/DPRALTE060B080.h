@@ -14,8 +14,8 @@
 #ifndef IGV_DPRALTE060B080_SERIAL_PARAM
 #define IGV_DPRALTE060B080_SERIAL_PARAM
 
-#define LEFT_PORT  "/dev/ttyUSB0"
-#define RIGHT_PORT "/dev/ttyUSB1"
+#define LEFT_PORT  "/dev/ttyUSB1"
+#define RIGHT_PORT "/dev/ttyUSB2"
 // #define WRITE_TO_LENGTH  12
 // #define READ_FROM_LENGTH  8
 // #define VEL_CMD_LENGTH   14
