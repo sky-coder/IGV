@@ -1,14 +1,20 @@
 # IGV (Intelligent Ground Vehicle)
 Source files for Intelligent Ground Vehicle project.
 
+## Packages
+###1. dpralte060b080
+A package used for communicating with the Stepper Motor using serial communication. 
+
+###2. os5000
+A package used for communicating with the OS5000 Compass using serial communication. 
+
 ## Dependencies
 ###1. serial
 A serial communication package from https://github.com/wjwwood/serial, was 
-installed for globally use after June 27, 2016.
+installed for global use after June 27, 2016.
 
 ###2. sicktoolbox & sicktoolbox_wrapper
-These two packages were installed for globally use instead of being used as 
-submodules.
+These two packages are used to interface with the SICK LiDAR and were installed for global use instead of being used as submodules.
 
 (1)Installation:
 
