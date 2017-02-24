@@ -128,7 +128,7 @@ int DPRALTE060B080::getDistance_Left()
     // }
     // std::cout << std::endl;
 
-    DPRALTE060B080::converttoDistance();
+    DPRALTE060B080::convertToDistance();
 
     delete[] TxBuffer;
     delete[] RxBuffer;
@@ -215,7 +215,7 @@ int DPRALTE060B080::getDistance_Right()
     RightPort.write(TxBuffer, 8);
     RightPort.read(RxBuffer, 14);
 
-    DPRALTE060B080::converttoDistance();
+    DPRALTE060B080::convertToDistance();
 
     delete[] TxBuffer;
     delete[] RxBuffer;
