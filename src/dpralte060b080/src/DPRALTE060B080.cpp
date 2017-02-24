@@ -6,14 +6,14 @@ DPRALTE060B080::DPRALTE060B080()
 {
     VelocityArray = new int[4];
     CRCArray = new unsigned int[2];
-    OdometryArray = new uint8_t[4];
+    DistanceArray = new uint8_t[4];
 
     DPRALTE060B080::setupSerialCommunication();
 
     // DPRALTE060B080::getReadAccess_Left();
     // DPRALTE060B080::getReadAccess_Right();
-    home_left = DPRALTE060B080::getOdometry_Left();
-    home_right = DPRALTE060B080::getOdometry_Right();
+    home_left = DPRALTE060B080::getDistance_Left();
+    home_right = DPRALTE060B080::getDistance_Right();
     // std::cout << "home of left is: " << home_left << std::endl;
     // std::cout << "home of right is: " << home_right << std::endl;
 }
@@ -26,8 +26,8 @@ DPRALTE060B080::~DPRALTE060B080()
     if(CRCArray){
         delete[] CRCArray;
     }
-    if(OdometryArray){
-        delete[] OdometryArray;
+    if(DistanceArray){
+        delete[] DistanceArray;
     }
 
     if(TxBuffer){
@@ -107,13 +107,13 @@ void DPRALTE060B080::setVelocity_Left(int vel_in)
 // {
 //     TxBuffer = new uint8_t[8];
 //     RxBuffer = new uint8_t[14];
-// 
+//
 //     DPRALTE060B080::setTxBuffer(0xa5, 0x3e, 0x01, 0x07, 0x00, 0x01, 0x82, 0x6a);
 //     LeftPort.write(TxBuffer, 8);
 //     LeftPort.read(RxBuffer, 14);
 // }
 
-int DPRALTE060B080::getOdometry_Left()
+int DPRALTE060B080::getDistance_Left()
 {
     TxBuffer = new uint8_t[8];
     RxBuffer = new uint8_t[14];
@@ -128,12 +128,12 @@ int DPRALTE060B080::getOdometry_Left()
     // }
     // std::cout << std::endl;
 
-    DPRALTE060B080::converttoOdometry();
+    DPRALTE060B080::converttoDistance();
 
     delete[] TxBuffer;
     delete[] RxBuffer;
 
-    return odometry - home_left;
+    return distance - home_left;
 }
 //----------------------------------------------------------------------- Right
 void DPRALTE060B080::getWriteAccess_Right()
@@ -184,7 +184,7 @@ void DPRALTE060B080::setVelocity_Right(int vel_in)
     DPRALTE060B080::getCRCArray();
     TxBuffer = new uint8_t[14];
     RxBuffer = new uint8_t[8];
-	
+
     DPRALTE060B080::setTxBuffer(0xa5, 0x3f, 0x02, 0x45, 0x02, 0x02, 0x96, 0x2b,
                                 VelocityArray[0],
                                 VelocityArray[1],
@@ -206,21 +206,21 @@ void DPRALTE060B080::setVelocity_Right(int vel_in)
 //     RightPort.read(RxBuffer, 14);
 // }
 
-int DPRALTE060B080::getOdometry_Right()
+int DPRALTE060B080::getDistance_Right()
 {
     TxBuffer = new uint8_t[8];
     RxBuffer = new uint8_t[14];
-	
+
     DPRALTE060B080::setTxBuffer(0xa5, 0x3f, 0x01, 0x12, 0x00, 0x02, 0xb0, 0xcb);
     RightPort.write(TxBuffer, 8);
     RightPort.read(RxBuffer, 14);
 
-    DPRALTE060B080::converttoOdometry();
+    DPRALTE060B080::converttoDistance();
 
     delete[] TxBuffer;
     delete[] RxBuffer;
 
-    return odometry - home_right;
+    return distance - home_right;
 }
 
 
@@ -288,20 +288,20 @@ void DPRALTE060B080::getCRCArray()
 }
 
 //============================================================================= Part 4
-void DPRALTE060B080::converttoOdometry()
+void DPRALTE060B080::convertToDistance()
 {
-    odometry = 0;
+    distance = 0;
 
     for(int i = 0; i < 4; i++){
-        OdometryArray[i] = RxBuffer[8+i];
+        DistanceArray[i] = RxBuffer[8+i];
 
-        Odo_ss.str(std::string());
-        Odo_ss.clear();
-        Odo_ss /*<< std::hex*/ << (OdometryArray[i] << (8*i));
-        Odo_ss >> temp;
+        Dis_ss.str(std::string());
+        Dis_ss.clear();
+        Dis_ss /*<< std::hex*/ << (DistanceArray[i] << (8*i));
+        Dis_ss >> temp;
         // std::cout << "temp is: " << temp << std::endl;
 
-        odometry += temp;
+        distance += temp;
     }
 }
 
@@ -311,7 +311,7 @@ void DPRALTE060B080::setTxBuffer(
         int sof, int address, int controlbyte, int index, int offset, int header_datawords,
         unsigned int headercrc_0, unsigned int headercrc_1,
         // data section
-        int datafield_0, int datafield_1, 
+        int datafield_0, int datafield_1,
         unsigned int datacrc_0, unsigned int datacrc_1)
 {
     TxBuffer[0]  = sof;
@@ -334,7 +334,7 @@ void DPRALTE060B080::setTxBuffer(
         int sof, int address, int controlbyte, int index, int offset, int header_datawords,
         unsigned int headercrc_0, unsigned int headercrc_1,
         // data section
-        int datafield_0, int datafield_1, int datafield_2, int datafield_3, 
+        int datafield_0, int datafield_1, int datafield_2, int datafield_3,
         unsigned int datacrc_0, unsigned int datacrc_1)
 {
     TxBuffer[0]  = sof;
