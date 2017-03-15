@@ -10,14 +10,15 @@ void poseCallback(const geometry_msgs::Twist::ConstPtr& Compass){
    tf::Transform CompassTransform;
    tf::Transform LaserTransform;
 
-   CompassTransform.setOrigin(tf::Vector3(0.0,0.0,-0.25));
+   CompassTransform.setOrigin(tf::Vector3(0.0,0.0,0.25));
 
    tf::Quaternion CompassQuaternion;
    tf::Quaternion LaserQuaternion;
    
-   CompassQuaternion.setRPY((Compass->angular.x*FC),(Compass->angular.y*FC),(Compass->angular.z*FC)+360);
-   CompassTransform.setRotation(CompassQuaternion);
-   broadcaster.sendTransform(tf::StampedTransform(CompassTransform, ros::Time::now(), "odom", "base_link"));
+//This section is commented as we are already broadcasting this /tf branh in dpralte060b080 
+   //CompassQuaternion.setRPY((Compass->angular.x*FC),(Compass->angular.y*FC),(Compass->angular.z*FC)+360);
+   //CompassTransform.setRotation(CompassQuaternion);
+   //broadcaster.sendTransform(tf::StampedTransform(CompassTransform, ros::Time::now(), "odom", "base_link"));
    
    
    LaserTransform.setOrigin(tf::Vector3(0.0,0.0,0.10));

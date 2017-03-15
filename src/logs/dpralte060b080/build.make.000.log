@@ -1,0 +1,60 @@
+[35m[1mScanning dependencies of target dpralte060b080
+[35m[1mScanning dependencies of target std_msgs_generate_messages_py
+[0m[0m[  0%] Built target std_msgs_generate_messages_py
+[ 11%] [35m[1mScanning dependencies of target _dpralte060b080_generate_messages_check_deps_DPRALTE060B080_Msg
+[0m[32mBuilding CXX object CMakeFiles/dpralte060b080.dir/src/DPRALTE060B080.cpp.o
+[0m[ 11%] Built target _dpralte060b080_generate_messages_check_deps_DPRALTE060B080_Msg
+[35m[1mScanning dependencies of target std_msgs_generate_messages_cpp
+[0m[ 11%] Built target std_msgs_generate_messages_cpp
+[35m[1mScanning dependencies of target std_msgs_generate_messages_lisp
+[0m[ 11%] Built target std_msgs_generate_messages_lisp
+[35m[1mScanning dependencies of target rosgraph_msgs_generate_messages_lisp
+[0m[ 11%] Built target rosgraph_msgs_generate_messages_lisp
+[35m[1mScanning dependencies of target geometry_msgs_generate_messages_cpp
+[0m[ 11%] Built target geometry_msgs_generate_messages_cpp
+[35m[1mScanning dependencies of target geometry_msgs_generate_messages_lisp
+[0m[ 11%] Built target geometry_msgs_generate_messages_lisp
+[35m[1mScanning dependencies of target geometry_msgs_generate_messages_py
+[0m[ 11%] Built target geometry_msgs_generate_messages_py
+[35m[1mScanning dependencies of target roscpp_generate_messages_cpp
+[0m[ 11%] Built target roscpp_generate_messages_cpp
+[35m[1mScanning dependencies of target rosgraph_msgs_generate_messages_py
+[0m[ 11%] Built target rosgraph_msgs_generate_messages_py
+[35m[1mScanning dependencies of target rosgraph_msgs_generate_messages_cpp
+[0m[ 11%] Built target rosgraph_msgs_generate_messages_cpp
+[35m[1mScanning dependencies of target roscpp_generate_messages_py
+[0m[ 11%] Built target roscpp_generate_messages_py
+[35m[1mScanning dependencies of target roscpp_generate_messages_lisp
+[0m[ 11%] Built target roscpp_generate_messages_lisp
+[35m[1mScanning dependencies of target dpralte060b080_generate_messages_py
+[0m[ 22%] [34m[1mGenerating Python from MSG dpralte060b080/DPRALTE060B080_Msg
+[0m[ 33%] [34m[1mGenerating Python msg __init__.py for dpralte060b080
+[0m[ 33%] Built target dpralte060b080_generate_messages_py
+[35m[1mScanning dependencies of target dpralte060b080_generate_messages_cpp
+[0m[ 44%] [34m[1mGenerating C++ code from dpralte060b080/DPRALTE060B080_Msg.msg
+[0m[ 44%] Built target dpralte060b080_generate_messages_cpp
+[35m[1mScanning dependencies of target dpralte060b080_generate_messages_lisp
+[0m[ 55%] [34m[1mGenerating Lisp code from dpralte060b080/DPRALTE060B080_Msg.msg
+[0m[ 55%] Built target dpralte060b080_generate_messages_lisp
+[35m[1mScanning dependencies of target dpralte060b080_generate_messages
+[0m[ 55%] Built target dpralte060b080_generate_messages
+[35m[1mScanning dependencies of target igv_DPRALTE060B080
+[0m[ 66%] [32mBuilding CXX object CMakeFiles/igv_DPRALTE060B080.dir/node/igv_teleop_key.cpp.o
+[0m[31m[1mLinking CXX shared library /home/IGV/IGV_ws/src/devel/.private/dpralte060b080/lib/libdpralte060b080.so
+[0m[ 66%] Built target dpralte060b080
+[35m[1mScanning dependencies of target igv_Demo
+[0m[ 77%] [32mBuilding CXX object CMakeFiles/igv_Demo.dir/node/Demo_Node.cpp.o
+/home/IGV/IGV_ws/src/src/dpralte060b080/node/igv_teleop_key.cpp: In function ‘int main(int, char**)’:
+/home/IGV/IGV_ws/src/src/dpralte060b080/node/igv_teleop_key.cpp:135:33: error: ‘class DPRALTE060B080’ has no member named ‘getOdometry_Left’
+         Msg.odometry_left = IGV.getOdometry_Left();
+                                 ^
+/home/IGV/IGV_ws/src/src/dpralte060b080/node/igv_teleop_key.cpp:136:34: error: ‘class DPRALTE060B080’ has no member named ‘getOdometry_Right’
+         Msg.odometry_right = IGV.getOdometry_Right();
+                                  ^
+make[2]: *** [CMakeFiles/igv_DPRALTE060B080.dir/node/igv_teleop_key.cpp.o] Error 1
+make[1]: *** [CMakeFiles/igv_DPRALTE060B080.dir/all] Error 2
+make[1]: *** Waiting for unfinished jobs....
+[0m[ 88%] [32mBuilding CXX object CMakeFiles/igv_Demo.dir/src/DPRALTE060B080.cpp.o
+[0m[31m[1mLinking CXX executable /home/IGV/IGV_ws/src/devel/.private/dpralte060b080/lib/dpralte060b080/igv_Demo
+[0m[ 88%] Built target igv_Demo
+make: *** [all] Error 2

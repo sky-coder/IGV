@@ -1,0 +1,10 @@
+/home/IGV/IGV_ws/src/src/dpralte060b080/node/igv_teleop_key.cpp: In function ‘int main(int, char**)’:
+/home/IGV/IGV_ws/src/src/dpralte060b080/node/igv_teleop_key.cpp:135:33: error: ‘class DPRALTE060B080’ has no member named ‘getOdometry_Left’
+         Msg.odometry_left = IGV.getOdometry_Left();
+                                 ^
+/home/IGV/IGV_ws/src/src/dpralte060b080/node/igv_teleop_key.cpp:136:34: error: ‘class DPRALTE060B080’ has no member named ‘getOdometry_Right’
+         Msg.odometry_right = IGV.getOdometry_Right();
+                                  ^
+make[2]: *** [CMakeFiles/igv_DPRALTE060B080.dir/node/igv_teleop_key.cpp.o] Error 1
+make[1]: *** [CMakeFiles/igv_DPRALTE060B080.dir/all] Error 2
+make: *** [all] Error 2

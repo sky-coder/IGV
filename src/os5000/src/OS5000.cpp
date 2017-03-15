@@ -88,7 +88,7 @@ float OS5000::getRoll()
 //============================================================================= Part
 void OS5000::setupSerialConnection()
 {
-    OSPort.setPort("/dev/ttyUSB1");
+    OSPort.setPort("/dev/ttyUSB3");
     OSPort.setBaudrate(9600);
     serial::Timeout to = serial::Timeout::simpleTimeout(1000);
     OSPort.setTimeout(to);

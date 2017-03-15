@@ -1,0 +1,4 @@
+Symlinking /home/IGV/IGV_ws/src/devel/share/robot_setup_tf/cmake/robot_setup_tfConfig.cmake
+Symlinking /home/IGV/IGV_ws/src/devel/share/robot_setup_tf/cmake/robot_setup_tfConfig-version.cmake
+Symlinking /home/IGV/IGV_ws/src/devel/lib/pkgconfig/robot_setup_tf.pc
+Symlinking /home/IGV/IGV_ws/src/devel/lib/robot_setup_tf/tf_broadcaster

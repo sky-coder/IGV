@@ -1,0 +1,8 @@
+Symlinking /home/IGV/IGV_ws/src/devel/./setup.sh
+Symlinking /home/IGV/IGV_ws/src/devel/./setup.zsh
+Symlinking /home/IGV/IGV_ws/src/devel/./_setup_util.py
+Symlinking /home/IGV/IGV_ws/src/devel/./setup.bash
+Symlinking /home/IGV/IGV_ws/src/devel/./env.sh
+Symlinking /home/IGV/IGV_ws/src/devel/share/catkin_tools_prebuild/cmake/catkin_tools_prebuildConfig.cmake
+Symlinking /home/IGV/IGV_ws/src/devel/share/catkin_tools_prebuild/cmake/catkin_tools_prebuildConfig-version.cmake
+Symlinking /home/IGV/IGV_ws/src/devel/lib/pkgconfig/catkin_tools_prebuild.pc
