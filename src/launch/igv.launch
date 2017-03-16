@@ -1,3 +1,0 @@
-<launch>
-    <node name="compass_odom" />
-</launch>

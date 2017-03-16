@@ -1,4 +1,0 @@
-[35m[1mScanning dependencies of target tf_broadcaster
-[0m[100%] [32mBuilding CXX object CMakeFiles/tf_broadcaster.dir/src/tf_broadcaster.cpp.o
-[0m[31m[1mLinking CXX executable /home/IGV/IGV_ws/src/devel/.private/robot_setup_tf/lib/robot_setup_tf/tf_broadcaster
-[0m[100%] Built target tf_broadcaster
