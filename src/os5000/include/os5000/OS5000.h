@@ -29,22 +29,26 @@ class OS5000
         ~OS5000();
 
         // Part 1
-        void getOrientation();
-        float getYaw();
-        float getPitch();
-        float getRoll();
-        
-        // Part
-        void setupSerialConnection();
-        void initializeIMU();
+        void getOrientation(); // line 19
+        float getYaw();        // line 73
+        float getPitch();      // line 78
+        float getRoll();       // line 83
+
+        // Part 2
+        void setupSerialConnection(); // line 89
+        // void initializeImu();
+
+    public:
+        std::string port;
+        uint32_t baudrate;
 
     private:
         sensor_msgs::Imu ImuMsg;
-        serial::Serial OSPort;
+        serial::Serial ImuSerial;
 
         std::string RawData; //TODO get a better identifier
         std::stringstream Orientation;
-        unsigned int position, length;
+        uint32_t position, length;
         float yaw, pitch, roll;
 };
 

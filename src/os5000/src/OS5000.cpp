@@ -2,16 +2,19 @@
 #include <ros/ros.h>
 
 OS5000::OS5000()
-    :yaw(-1.0f), pitch(-1.0f), roll(-1.0f)
 {
-    OS5000::setupSerialConnection();
+    port = "/dev/ttyUSB0";
+    baudrate = 9600;
+    yaw   = 0.0f;
+    pitch = 0.0f;
+    roll  = 0.0f;
 }
 
 OS5000::~OS5000()
 {
-    if(OSPort.isOpen())
+    if(ImuSerial.isOpen())
     {
-        OSPort.close();
+        ImuSerial.close();
     }
 }
 
@@ -21,7 +24,7 @@ void OS5000::getOrientation()
     while(1)
     {
         RawData.clear();
-        RawData = OSPort.readline(23, "\n");
+        RawData = ImuSerial.readline(23, "\n");
 
         if(RawData.find("$") == std::string::npos || RawData.find("$") != 0)
         {
@@ -29,7 +32,7 @@ void OS5000::getOrientation()
             std::cout << RawData << std::endl;
             continue;
         }
-        else if(!RawData.find("C") || !RawData.find("P") || 
+        else if(!RawData.find("C") || !RawData.find("P") ||
                 !RawData.find("R") || !RawData.find("*"))
         {
             std::cout << "--> Frame skipped: incomplete frame." << std::endl;
@@ -67,7 +70,6 @@ void OS5000::getOrientation()
 
         break;
     }
-    //ros::shutdown();
 }
 
 float OS5000::getYaw()
@@ -85,24 +87,23 @@ float OS5000::getRoll()
     return roll;
 }
 
-//============================================================================= Part
+//============================================================================= Part 2
 void OS5000::setupSerialConnection()
 {
-    OSPort.setPort("/dev/ttyUSB3");
-    OSPort.setBaudrate(9600);
-    serial::Timeout to = serial::Timeout::simpleTimeout(1000);
-    OSPort.setTimeout(to);
+    ImuSerial.setPort(port);
+    ImuSerial.setBaudrate(baudrate);
+    serial::Timeout To = serial::Timeout::simpleTimeout(1000);
+    ImuSerial.setTimeout(To);
 
-    while(!OSPort.isOpen()){
+    while(!ImuSerial.isOpen()){
         std::cout << "\n--> Trying to connect..." << std::endl;
-        OSPort.open();
+        ImuSerial.open();
     }
     std::cout << "\n--> OS5000 is connected!\n" << std::endl;
 }
-
-void OS5000::initializeIMU()
+/*
+void OS5000::initializeImu()
 {
-    
     ImuMsg.orientation_covariance[0] = IDENTITY;
     ImuMsg.orientation_covariance[4] = IDENTITY;
     ImuMsg.orientation_covariance[8] = IDENTITY;
@@ -115,3 +116,4 @@ void OS5000::initializeIMU()
     ImuMsg.linear_acceleration_covariance[4] = INVALID;
     ImuMsg.linear_acceleration_covariance[8] = INVALID;
 }
+*/
