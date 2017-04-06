@@ -1,0 +1,12 @@
+#SUBSYSTEM=="tty", ATTRS{idProduct}=="2303", ATTRS{serial}=="0000:00:1d.1", SYMLINK+="right_motor"
+#SUBSYSTEM=="tty", ATTRS{idProduct}=="0001", ATTRS{serial}=="0000:00:1d.0", SYMLINK+="left_motor"
+
+# Persistent port allocations
+# Left Stepper Motor
+SUBSYSTEM=="tty", KERNELS=="2-1", ATTRS{idProduct}=="2303", ATTRS{idVendor}=="067b", SYMLINK+="left_motor"
+
+# Right Stepper Motor
+SUBSYSTEM=="tty", KERNELS=="1-1", ATTRS{idProduct}=="2303", ATTRS{idVendor}=="067b", SYMLINK+="right_motor"
+
+# Compass
+SUBSYSTEM=="tty", ATTRS{idProduct}=="ea60", ATTRS{idVendor}=="10c4", SYMLINK+="compass_serial"
