@@ -2,10 +2,10 @@
 Source files for Intelligent Ground Vehicle project.
 
 ## Packages
-###1. dpralte060b080
+### 1. dpralte060b080
 A package used for communicating with the Stepper Motor using serial communication. 
 
-###2. os5000
+### 2. os5000
 A package used for communicating with the OS5000 Compass using serial communication. 
 
 ## Dependencies
@@ -28,4 +28,4 @@ These two packages are used to interface with the SICK LiDAR and were installed 
 ### 3. Persistent Serial names
 Provides persistent names to devices plugged in the USB ports
 
-Paste 99-usb-serial.rules in /etc/udev/rules.d
+Paste **99-usb-serial.rules** in **/etc/udev/rules.d**
