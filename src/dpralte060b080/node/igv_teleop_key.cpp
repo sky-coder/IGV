@@ -72,7 +72,7 @@ Input stream: ";
 	break;
 
 	case 'l':
-        Msg.velocity_left  =  1.5 * speed;
+        Msg.velocity_left  =  2 * speed;
         Msg.velocity_right =  0.5 * speed;
 	break;
 

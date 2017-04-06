@@ -1,6 +1,9 @@
 #include "os5000/OS5000.h"
 #include <ros/ros.h>
 
+// Using persistent port for compass. Refer 99-usb-serial.rules in /etc/udev/rules.d
+#define COMPASS_PORT "/dev/compass_serial"
+
 OS5000::OS5000()
     :yaw(-1.0f), pitch(-1.0f), roll(-1.0f)
 {
@@ -21,7 +24,7 @@ void OS5000::getOrientation()
     while(1)
     {
         RawData.clear();
-        RawData = OSPort.readline(23, "\n");
+        RawData = OSPort.readline(28, "\n");
 
         if(RawData.find("$") == std::string::npos || RawData.find("$") != 0)
         {
@@ -88,7 +91,7 @@ float OS5000::getRoll()
 //============================================================================= Part
 void OS5000::setupSerialConnection()
 {
-    OSPort.setPort("/dev/ttyUSB3");
+    OSPort.setPort(COMPASS_PORT);
     OSPort.setBaudrate(9600);
     serial::Timeout to = serial::Timeout::simpleTimeout(1000);
     OSPort.setTimeout(to);

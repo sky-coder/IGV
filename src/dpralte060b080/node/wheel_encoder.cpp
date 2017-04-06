@@ -1,11 +1,20 @@
 #include <ros/ros.h>
 #include <nav_msgs/Odometry.h>
 #include <geometry_msgs/Vector3.h>
+#include <geometry_msgs/Pose.h>
 #include <tf/transform_broadcaster.h>
 
 #include <iostream>
 #include <math.h>
 #include "dpralte060b080/DPRALTE060B080.h"
+
+geometry_msgs::Quaternion odom_quat;
+
+void compassCallback(const geometry_msgs::Pose::ConstPtr& compass)
+{
+ 
+    odom_quat = compass->orientation;
+}
 
 int main(int argc, char **argv)
 {
@@ -22,7 +31,8 @@ int main(int argc, char **argv)
 
     //ros::Publisher wheel_pub = n.advertise<dpralte060b080::DPRALTE060B080_Msg>("wheel",10);
     ros::Publisher wheelOdom_pub = n.advertise<nav_msgs::Odometry>("wheelOdom",10);
-    //ros::Subscriber sub = c.subscribe
+    ros::Subscriber sub = c.subscribe("compass", 1000, compassCallback);
+
     int ticks_left = 0;
     int ticks_right = 0;
     int initial_flag = 1;
@@ -76,7 +86,7 @@ int main(int argc, char **argv)
         y += delta_y;
         th += delta_th;
         //std::cout<<vx<<" "<<vth<<"\n";
-        geometry_msgs::Quaternion odom_quat = tf::createQuaternionMsgFromYaw(th);
+        //geometry_msgs::Quaternion odom_quat = tf::createQuaternionMsgFromYaw(th);
 
         //Odometry
         //nav_msgs::Odometry odom;
@@ -88,7 +98,7 @@ int main(int argc, char **argv)
         odom.pose.pose.position.y = y;
         odom.pose.pose.position.z = 0.0;
         odom.pose.pose.orientation = odom_quat;
-
+        std::cout<<"x: "<<x<<" y: "<<y<<" o: "<<odom_quat<<"\n";
         //set the velocity
         odom.child_frame_id = "base_link";
         odom.twist.twist.linear.x = vx;
